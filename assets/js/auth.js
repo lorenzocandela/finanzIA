@@ -57,12 +57,12 @@ function loginAsGuest() {
         isGuest: true
     };
     sessionStorage.setItem('guestUser', JSON.stringify(guestUser));
-    window.location.href = 'dashboard.html';
+    window.location.href = 'dashboard.php';
 }
 
 function handleSuccessfulLogin(user) {
     sessionStorage.removeItem('guestUser');
-    window.location.href = 'dashboard.html';
+    window.location.href = 'dashboard.php';
 }
 
 onAuthStateChanged(auth, (user) => {
@@ -70,7 +70,7 @@ onAuthStateChanged(auth, (user) => {
     const guestUser = sessionStorage.getItem('guestUser');
     
     if (user && isLoginPage) {
-        window.location.href = 'dashboard.html';
+        window.location.href = 'dashboard.php';
     }
 });
 

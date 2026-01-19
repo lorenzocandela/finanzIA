@@ -1,8 +1,14 @@
+/**
+ * Dashboard Main JS
+ * Auth, tab switching, mobile sidebar
+ */
+
 import { auth, onAuthStateChanged, signOut } from './firebase-config.js';
 
 let currentUser = null;
 
-// check auth
+// ==================== AUTH ====================
+
 function checkAuth() {
     const guestUser = sessionStorage.getItem('guestUser');
     
@@ -28,7 +34,6 @@ function checkAuth() {
     });
 }
 
-// update ui with user info
 function updateUI(user) {
     const userName = document.getElementById('userName');
     const userAvatar = document.getElementById('userAvatar');
@@ -51,7 +56,6 @@ function getInitials(name) {
     return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
 }
 
-// logout
 async function logout() {
     try {
         sessionStorage.removeItem('guestUser');
@@ -63,50 +67,112 @@ async function logout() {
     }
 }
 
-// tabs
+// ==================== TAB NAVIGATION ====================
+
 function initTabs() {
-    const navItems = document.querySelectorAll('.nav-item');
+    const navItems = document.querySelectorAll('.nav-item[data-tab]');
     const tabContents = document.querySelectorAll('.tab-content');
-    const pageTitle = document.getElementById('pageTitle');
-    
-    const titles = {
-        'overview': 'Panoramica',
-        'prestiti': 'Prestiti',
-        'investimenti': 'Investimenti',
-        'profilo': 'Area Personale',
-        'assistente': 'FinanzIA'
-    };
     
     navItems.forEach(item => {
         item.addEventListener('click', () => {
             const tab = item.dataset.tab;
-            
-            navItems.forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-            
-            tabContents.forEach(content => {
-                content.classList.remove('active');
-                if (content.id === `tab-${tab}`) {
-                    content.classList.add('active');
-                }
-            });
-            
-            if (pageTitle && titles[tab]) {
-                pageTitle.textContent = titles[tab];
+            switchToTab(tab);
+        });
+    });
+    
+    // Handle data-goto-tab buttons/links
+    document.addEventListener('click', (e) => {
+        const gotoBtn = e.target.closest('[data-goto-tab]');
+        if (gotoBtn) {
+            e.preventDefault();
+            const tab = gotoBtn.dataset.gotoTab;
+            switchToTab(tab);
+        }
+    });
+}
+
+function switchToTab(tabName) {
+    const navItems = document.querySelectorAll('.nav-item[data-tab]');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    // Update nav
+    navItems.forEach(i => i.classList.remove('active'));
+    const activeNav = document.querySelector(`.nav-item[data-tab="${tabName}"]`);
+    if (activeNav) activeNav.classList.add('active');
+    
+    // Update content
+    tabContents.forEach(content => {
+        content.classList.remove('active');
+        if (content.id === `tab-${tabName}`) {
+            content.classList.add('active');
+        }
+    });
+    
+    // Close mobile sidebar if open
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (sidebar) sidebar.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+}
+
+// ==================== SUBTAB NAVIGATION ====================
+
+function initSubTabs() {
+    document.addEventListener('click', (e) => {
+        const tabBtn = e.target.closest('.tab-nav-btn');
+        if (!tabBtn) return;
+        
+        const subtab = tabBtn.dataset.subtab;
+        const container = tabBtn.closest('.tab-content');
+        
+        // Update nav buttons
+        container.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
+        tabBtn.classList.add('active');
+        
+        // Update subtab content
+        container.querySelectorAll('.subtab-content').forEach(content => {
+            content.classList.remove('active');
+            if (content.id === `subtab-${subtab}`) {
+                content.classList.add('active');
             }
         });
     });
 }
 
-// init
+// ==================== MOBILE SIDEBAR ====================
+
+function initMobileSidebar() {
+    const mobileToggle = document.getElementById('mobileToggle');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    
+    if (!mobileToggle || !sidebar) return;
+    
+    mobileToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        sidebarOverlay.classList.toggle('open');
+    });
+    
+    sidebarOverlay.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('open');
+    });
+}
+
+// ==================== INIT ====================
+
 document.addEventListener('DOMContentLoaded', () => {
     checkAuth();
     initTabs();
+    initSubTabs();
+    initMobileSidebar();
     
+    // Logout button
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', logout);
     }
 });
 
-export { currentUser, logout };
+// Export for use in tab modules
+export { currentUser, logout, switchToTab };
