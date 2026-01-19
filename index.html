@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanzIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/landing.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <div class="nav-links">
+                <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="FinanzIA Logo"></a>
+                <a href="#servizi">Servizi</a>
+                <a href="#simulatore">Simulatore</a>
+                <a href="#perche">Perche noi</a>
+            </div>
+            <div class="nav-actions">
+                <a href="pages/login.html" class="btn btn-ghost">Accedi</a>
+                <a href="pages/login.html" class="btn btn-primary">Inizia ora</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot"></span>
+                        Powered by AI
+                    </div>
+                    <h1>Il tuo futuro finanziario,<br><span>semplice e veloce</span></h1>
+                    <p>Prestiti fino a 60.000 euro con risposta immediata. Simula, richiedi e gestisci tutto online, quando vuoi.</p>
+                    <div class="hero-buttons">
+                        <a href="pages/login.html" class="btn btn-primary btn-lg">Inizia gratis</a>
+                        <a href="#simulatore" class="btn btn-outline btn-lg">Prova il simulatore</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-value">10k+</span>
+                            <span class="stat-label">Utenti attivi</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">50M</span>
+                            <span class="stat-label">Prestiti erogati</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">4.9</span>
+                            <span class="stat-label">Rating medio</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual" id="simulatore">
+                    <div class="simulator-card">
+                        <div class="simulator-header">Simulatore Prestito</div>
+                        <div class="simulator-body">
+                            <div class="slider-group">
+                                <label>Importo richiesto</label>
+                                <input type="range" class="slider" id="importo" min="1000" max="60000" value="15000" step="500">
+                                <div class="slider-labels">
+                                    <span>1.000</span>
+                                    <span class="slider-value" id="importoValue">15.000</span>
+                                    <span>60.000</span>
+                                </div>
+                            </div>
+                            <div class="slider-group">
+                                <label>Durata (mesi)</label>
+                                <input type="range" class="slider" id="durata" min="12" max="120" value="48" step="6">
+                                <div class="slider-labels">
+                                    <span>12</span>
+                                    <span class="slider-value" id="durataValue">48</span>
+                                    <span>120</span>
+                                </div>
+                            </div>
+                            <div class="simulator-result">
+                                <span class="result-label">Rata mensile</span>
+                                <div class="result-value" id="rataValue">362,50</div>
+                                <div class="result-details">
+                                    <span>TAN 7,50%</span>
+                                    <span>TAEG 8,20%</span>
+                                </div>
+                            </div>
+                            <a href="pages/login.html" class="btn btn-primary btn-block">Richiedi questo prestito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="servizi">
+        <div class="container">
+            <span class="section-tag">Servizi</span>
+            <h2 class="section-title">Tutto cio di cui hai bisogno</h2>
+            <p class="section-desc">Una piattaforma completa per gestire prestiti e investimenti in modo semplice.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                        </svg>
+                    </div>
+                    <h3>Prestiti Personali</h3>
+                    <p>Richiedi fino a 60.000 con approvazione rapida. Simula la rata e invia la richiesta in pochi minuti.</p>
+                    <a href="pages/login.html" class="service-link">Scopri di piu</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                        </svg>
+                    </div>
+                    <h3>Simulatore Investimenti</h3>
+                    <p>Proietta i tuoi risparmi nel tempo con diversi profili di rischio e visualizza i rendimenti.</p>
+                    <a href="pages/login.html" class="service-link">Scopri di piu</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Assistente Personale</h3>
+                    <p>Un assistente AI che ti aiuta con domande su prestiti, investimenti e gestione finanziaria.</p>
+                    <a href="pages/login.html" class="service-link">Scopri di piu</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Pronto a iniziare?</h2>
+            <p>Scopri quanto puoi ottenere in pochi minuti.</p>
+            <a href="pages/login.html" class="btn btn-white btn-lg">Crea account gratuito</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">Finanz<span>IA</span></a>
+                    <p>La piattaforma intelligente per prestiti e investimenti.</p>
+                </div>
+                <div class="footer-links">
+                    <h5>Prodotti</h5>
+                    <a href="#">Prestiti</a>
+                    <a href="#">Investimenti</a>
+                    <a href="#">Simulatore</a>
+                </div>
+                <div class="footer-links">
+                    <h5>Supporto</h5>
+                    <a href="#">FAQ</a>
+                    <a href="#">Contatti</a>
+                    <a href="#">FinanzIA Chat</a>
+                </div>
+                <div class="footer-links">
+                    <h5>Legale</h5>
+                    <a href="#">Privacy</a>
+                    <a href="#">Termini</a>
+                    <a href="#">Cookie</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>2026 FinanzIA - Pegaso, Lorenzo Candela</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/landing.js"></script>
+</body>
+</html>
